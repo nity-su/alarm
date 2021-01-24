@@ -2,9 +2,7 @@ package com.anlyn.alarmwheater.Dagger
 
 import android.content.Context
 import com.anlyn.alarmwheater.Dagger.data.DataModule
-import com.anlyn.alarmwheater.MainActivity
-import com.anlyn.data.db.local.AppDataBase
-import com.anlyn.domain.AlarmCache
+import com.anlyn.alarmwheater.presentation.ui.DisplayAlarmActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -12,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [DataModule::class])
  interface MainComponent{
-    fun inject(mainActivity: MainActivity)
+    fun inject(mainActivity: DisplayAlarmActivity)
 
     @Component.Builder
     interface Builder{
