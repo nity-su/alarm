@@ -1,7 +1,6 @@
 package com.anlyn.data.db.local
 
 import com.anlyn.data.entities.AlarmData
-import com.anlyn.data.mapper.AlarmDataEntityMapper
 import com.anlyn.data.mapper.AlarmEntityDataMapper
 import com.anlyn.domain.AlarmCache
 import com.anlyn.domain.Mapper

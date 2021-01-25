@@ -8,12 +8,8 @@ import com.anlyn.data.db.local.RoomAlarmCache
 import com.anlyn.data.mapper.AlarmDataEntityMapper
 import com.anlyn.data.mapper.AlarmEntityDataMapper
 import com.anlyn.domain.AlarmCache
-import dagger.Binds
-import dagger.BindsInstance
 import dagger.Module
 import dagger.Provides
-import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module

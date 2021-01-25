@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.anlyn.alarmwheater.BR
 import com.anlyn.domain.models.AlarmEntity
 import com.anlyn.alarmwheater.R
-class DisplayAlarmAdapter(private val list: List<AlarmEntity>) : RecyclerView.Adapter<DisplayAlarmAdapter.AlarmCellViewHolder>() {
+class DisplayAlarmAdapter(private val list: List<AlarmEntity>?) : RecyclerView.Adapter<DisplayAlarmAdapter.AlarmCellViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmCellViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -16,10 +17,10 @@ class DisplayAlarmAdapter(private val list: List<AlarmEntity>) : RecyclerView.Ad
         return AlarmCellViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = list.count()
+    override fun getItemCount(): Int = list?.count() ?: 0
 
     override fun onBindViewHolder(holder: AlarmCellViewHolder, position: Int) {
-        holder.bind(list.get(position))
+        list?.get(position)?.let { holder.bind(it) }
     }
 
     fun setList(){
@@ -29,7 +30,7 @@ class DisplayAlarmAdapter(private val list: List<AlarmEntity>) : RecyclerView.Ad
     class AlarmCellViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(any:Any){
-//            binding.set
+             binding.setVariable(BR.AlarmEntity,any)
         }
     }
 }
