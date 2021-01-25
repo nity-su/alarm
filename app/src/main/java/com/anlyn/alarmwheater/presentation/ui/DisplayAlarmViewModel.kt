@@ -8,12 +8,13 @@ import com.anlyn.domain.usercase.GetAllAlarmUseCase
 
 class DisplayAlarmViewModel(val getAllAlarmUseCase: GetAllAlarmUseCase) : ViewModel(){
     private val _alarmCacheLiveData = MutableLiveData<List<AlarmEntity>>()
-    private val alarmCacheLiveData : LiveData<List<AlarmEntity>> = _alarmCacheLiveData
+     var alarmCacheLiveData : LiveData<List<AlarmEntity>> = _alarmCacheLiveData
 //https://android.jlelse.eu/how-to-bind-a-list-of-items-to-a-recyclerview-with-android-data-binding-1bd08b4796b4
 
     fun getAllAlarmEntity(){
         getAllAlarmUseCase.createObservable(null)
-            .subscribe({values -> _alarmCacheLiveData.value = values})
+            .subscribe({values -> _alarmCacheLiveData.value = values
+                alarmCacheLiveData = _alarmCacheLiveData})
 //        alarmCacheLiveData.value =
     }
 }
