@@ -22,7 +22,7 @@ class RoomAlarmCache @Inject constructor(val database:AppDataBase,
     }
 
     override fun getAll(): Observable<List<AlarmEntity>> {
-        TODO("Not yet implemented")
+        return Observable.fromCallable {(dao.getAllAlarmSetCondition()?.map { dataEntityMapper.mapFrom(it) })}
     }
 
     override fun remove(alarmEntity: AlarmEntity) {

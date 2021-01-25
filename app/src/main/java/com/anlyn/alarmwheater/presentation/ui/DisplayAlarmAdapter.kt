@@ -1,29 +1,32 @@
 package com.anlyn.alarmwheater.presentation.ui
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.anlyn.domain.models.AlarmEntity
+import com.anlyn.alarmwheater.R
+class DisplayAlarmAdapter(private val list: List<AlarmEntity>) : RecyclerView.Adapter<DisplayAlarmAdapter.AlarmCellViewHolder>() {
 
-class DisplayAlarmAdapter() : RecyclerView.Adapter<DisplayAlarmAdapter.MovieCellViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieCellViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmCellViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater,R.layout.alarm_item,parent,false)
+        return AlarmCellViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = list.count()
 
-    override fun onBindViewHolder(holder: MovieCellViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: AlarmCellViewHolder, position: Int) {
+        holder.bind(list.get(position))
     }
 
     fun setList(){
 
     }
 
-    class MovieCellViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root){
+    class AlarmCellViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(any:Any){
 //            binding.set
