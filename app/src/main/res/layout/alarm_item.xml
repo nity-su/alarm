@@ -45,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@{AlarmEntity.sun ? @color/colorAccent : @android:color/tab_indicator_text }"
                 android:text="일" />
             <!--                android:textColor="@{AlarmEntity.sun ? @color/colorAccent : null}"-->
 
