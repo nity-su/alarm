@@ -1,5 +1,7 @@
 package com.anlyn.alarmwheater.presentation.ui.displayalarm
 
+import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,5 +21,9 @@ class DisplayAlarmViewModel (val getAllAlarmUseCase: GetAllAlarmUseCase) : ViewM
             alarmCacheLiveData = _alarmCacheLiveData})
 
 //        alarmCacheLiveData.value =
+    }
+    fun dadsd(activity: AppCompatActivity){
+
+
     }
 }
