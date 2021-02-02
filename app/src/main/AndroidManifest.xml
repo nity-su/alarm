@@ -11,13 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.ui.alarmsetting.SettingActivity">
+        </activity>
+        <activity android:name=".presentation.ui.displayalarm.DisplayAlarmActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".presentation.ui.displayalarm.DisplayAlarmActivity">
         </activity>
     </application>
 

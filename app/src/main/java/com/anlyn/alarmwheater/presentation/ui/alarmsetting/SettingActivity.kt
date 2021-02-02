@@ -1,23 +1,37 @@
 package com.anlyn.alarmwheater.presentation.ui.alarmsetting
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.view.children
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.anlyn.alarmwheater.databinding.ActivitySettingBinding
-import javax.inject.Inject
+import com.anlyn.domain.models.AlarmEntity
+import java.io.Serializable
 
 
 class SettingActivity : AppCompatActivity() {
     companion object{
        const val TO_ONE = 4;
+
+        fun getCallingIntent(context: Context, alarmEntity: AlarmEntity?): Intent {
+            val intent = Intent(context,SettingActivity::class.java)
+            if(alarmEntity!=null)
+            intent.putExtra("alarmEntity",alarmEntity as Serializable)
+
+            return intent }
+
     }
-    @Inject
-    lateinit var viewModel:SettingViewModel
+
+    val viewModel : SettingViewModel by viewModels()
     val TAG = SettingActivity::class.simpleName
     lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +40,8 @@ class SettingActivity : AppCompatActivity() {
         setContentView(binding.root)
         timeSettingRcleInit( binding.mintueSettingRcle)
         timeSettingRcleInit(binding.hourSettingRcle)
+        btn_init()
+
     }
 
     private fun timeSettingRcleInit(recyclerView: RecyclerView){
@@ -46,6 +62,27 @@ class SettingActivity : AppCompatActivity() {
                     recyclerView.adapter = SettingMintueAdapter()
                     recyclerView.scrollToPosition(Integer.MAX_VALUE/2-TO_ONE +19)}
             }
+    }
+
+    fun btn_init(){
+        intent.getSerializableExtra("alarmEntity").let {
+            if (it != null) {
+                viewModel.alarmEntity = it as AlarmEntity
+                }else{
+                viewModel.alarmEntity = AlarmEntity()
+            }
+        }
+
+        binding.dayOfTheWeekTr.let{
+            for(v in it.children){
+                val btn = v as Button
+                btn.setOnClickListener(
+                    viewModel.dayOfTheWeekClicked(btn)
+                )
+            }
+        }
+
+        binding.configBtn.setOnClickListener({})
     }
 
     private fun getOnScrollListener(snapHelper: LinearSnapHelper): RecyclerView.OnScrollListener{
