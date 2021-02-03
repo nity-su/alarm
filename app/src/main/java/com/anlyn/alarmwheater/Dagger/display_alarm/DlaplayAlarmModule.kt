@@ -9,26 +9,26 @@ import com.anlyn.domain.usercase.GetAllAlarmUseCase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
-
+//object가 되는 이유는 바디{}에 있는 함수가 모두 static으로 처리되기 때문
 @Module
-class DisplayAlarmModule {
+object DisplayAlarmModule {
 
     @Provides
-    @AlarmActivityScope
+    @JvmStatic
     @Named("getAllAlarmUseCase")
     fun ProvidesGetAllAlarmUseCase(@Named("AlarmCache")  alarmCache: AlarmCache): GetAllAlarmUseCase{
         return GetAllAlarmUseCase(ASyncTransformer(),alarmCache)
     }
 
     @Provides
-    @AlarmActivityScope
+    @JvmStatic
     fun ProvidesVMFactory(@Named("getAllAlarmUseCase") getAllAlarmUseCase: GetAllAlarmUseCase): DisplayAlarmVMFactory {
         return DisplayAlarmVMFactory(
             getAllAlarmUseCase
         )
     }
     @Provides
-    @AlarmActivityScope
+    @JvmStatic
     fun ProvidesMovieListViewModel(@Named("getAllAlarmUseCase") getAllAlarmUseCase: GetAllAlarmUseCase) : ViewModel{
         return DisplayAlarmViewModel(
             getAllAlarmUseCase
