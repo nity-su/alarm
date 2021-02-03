@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.anlyn.domain.usercase.GetAllAlarmUseCase
 import javax.inject.Inject
+import javax.inject.Provider
 
 class DisplayAlarmVMFactory @Inject constructor (val getAllAlarmUseCase: GetAllAlarmUseCase) : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

@@ -14,11 +14,12 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 import javax.inject.Singleton
-
+//https://stackoverflow.com/questions/44894218/dagger-2-static-provider-methods-in-kotlin
 @Module
- class DataModule{
-
-    @Singleton
+ abstract class DataModule{
+    @Module
+    companion object{
+        @JvmStatic
         @Provides
         fun providesRoomDataBase(context: Context): AppDataBase {
             Log.d("ProvidesRoomDataBase", "exe")
@@ -28,8 +29,7 @@ import javax.inject.Singleton
                 "myDB"
             ).build()
         }
-
-    @Singleton
+        @JvmStatic
         @Provides
         @Named("AlarmCache")
         fun providesRoomAlarmCache(
@@ -40,6 +40,6 @@ import javax.inject.Singleton
             Log.d("RoomAlarmCache", "exe")
             return RoomAlarmCache(database, alarmEntityDataMapper, alarmDataEntityMapper)
         }
-
+    }
 
 }

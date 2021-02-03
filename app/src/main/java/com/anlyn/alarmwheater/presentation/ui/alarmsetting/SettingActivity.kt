@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.anlyn.alarmwheater.databinding.ActivitySettingBinding
 import com.anlyn.domain.models.AlarmEntity
+import dagger.android.AndroidInjection
 import java.io.Serializable
+import javax.inject.Inject
 
 
 class SettingActivity : AppCompatActivity() {
+
     companion object{
        const val TO_ONE = 4;
 
@@ -30,11 +33,12 @@ class SettingActivity : AppCompatActivity() {
             return intent }
 
     }
-
+//    @Inject lateinit var factory:SettingVMFactory
     val viewModel : SettingViewModel by viewModels()
     val TAG = SettingActivity::class.simpleName
     lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)

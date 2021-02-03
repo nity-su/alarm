@@ -14,13 +14,13 @@ import com.anlyn.alarmwheater.presentation.navigation.Navigator
 import com.anlyn.alarmwheater.presentation.ui.alarmsetting.SettingActivity
 import com.anlyn.domain.AlarmCache
 import com.anlyn.domain.models.AlarmEntity
+import dagger.android.AndroidInjection
 import java.io.Serializable
 import javax.inject.Inject
 import javax.inject.Named
 
 class DisplayAlarmActivity : AppCompatActivity() {
     private val TAG = this::class.simpleName
-
     private val REQUEST_CODE =1011
 
     @Inject
@@ -30,34 +30,34 @@ class DisplayAlarmActivity : AppCompatActivity() {
     @Inject
     lateinit var navigator: Navigator
     lateinit var binding : ActivityDisplayAlarmBinding
-    lateinit var viewModel : DisplayAlarmViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         val inflater = layoutInflater
         binding = ActivityDisplayAlarmBinding.inflate(inflater)
         setContentView(binding.root)
 
-        val subComponent = (application as AlarmAppApplication).createDisplayAlarmSubComponent()
-        subComponent.inject(this)
+//        val subComponent = (application as AlarmAppApplication).createDisplayAlarmSubComponent()
+//        subComponent.inject(this)
 
         initUI()
     }
 
     fun initUI(){
-        val model : DisplayAlarmViewModel by viewModels() { factory }
-        val adapter =
-            DisplayAlarmAdapter(
-                model.alarmCacheLiveData.value
-            )
-        Log.d(TAG,"size:"+model.alarmCacheLiveData.value?.size.toString())
-        binding.recylerView.layoutManager = LinearLayoutManager(applicationContext)
-        binding.recylerView.adapter = adapter
-        model.alarmCacheLiveData.observe(this, Observer {
-            adapter.setList(it)
-        })
+//        val model : DisplayAlarmViewModel by viewModels() { factory }
+//        val adapter =
+//            DisplayAlarmAdapter(
+//                model.alarmCacheLiveData.value
+//            )
+//        Log.d(TAG,"size:"+model.alarmCacheLiveData.value?.size.toString())
+//        binding.recylerView.layoutManager = LinearLayoutManager(applicationContext)
+//        binding.recylerView.adapter = adapter
+//        model.alarmCacheLiveData.observe(this, Observer {
+//            adapter.setList(it)
+//        })
 
-        binding.openSettingBtn.setOnClickListener({navigator.navigatorAlarmSetting(this,null,REQUEST_CODE)})
+//        binding.openSettingBtn.setOnClickListener({navigator.navigatorAlarmSetting(this,null,REQUEST_CODE)})
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
