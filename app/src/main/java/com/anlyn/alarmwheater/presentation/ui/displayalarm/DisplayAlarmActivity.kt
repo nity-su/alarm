@@ -45,19 +45,19 @@ class DisplayAlarmActivity : AppCompatActivity() {
     }
 
     fun initUI(){
-//        val model : DisplayAlarmViewModel by viewModels() { factory }
-//        val adapter =
-//            DisplayAlarmAdapter(
-//                model.alarmCacheLiveData.value
-//            )
-//        Log.d(TAG,"size:"+model.alarmCacheLiveData.value?.size.toString())
-//        binding.recylerView.layoutManager = LinearLayoutManager(applicationContext)
-//        binding.recylerView.adapter = adapter
-//        model.alarmCacheLiveData.observe(this, Observer {
-//            adapter.setList(it)
-//        })
+        val model : DisplayAlarmViewModel by viewModels() { factory }
+        val adapter =
+            DisplayAlarmAdapter(
+                model.alarmCacheLiveData.value
+            )
+        Log.d(TAG,"size:"+model.alarmCacheLiveData.value?.size.toString())
+        binding.recylerView.layoutManager = LinearLayoutManager(applicationContext)
+        binding.recylerView.adapter = adapter
+        model.alarmCacheLiveData.observe(this, Observer {
+            adapter.setList(it)
+        })
 
-//        binding.openSettingBtn.setOnClickListener({navigator.navigatorAlarmSetting(this,null,REQUEST_CODE)})
+        binding.openSettingBtn.setOnClickListener({navigator.navigatorAlarmSetting(this,null,REQUEST_CODE)})
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

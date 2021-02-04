@@ -33,8 +33,8 @@ class SettingActivity : AppCompatActivity() {
             return intent }
 
     }
-//    @Inject lateinit var factory:SettingVMFactory
-    val viewModel : SettingViewModel by viewModels()
+    @Inject lateinit var factory:SettingVMFactory
+    val viewModel : SettingViewModel by viewModels(){factory}
     val TAG = SettingActivity::class.simpleName
     lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,17 +42,27 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        alarmEntity_init()
         timeSettingRcleInit( binding.mintueSettingRcle)
         timeSettingRcleInit(binding.hourSettingRcle)
         btn_init()
 
     }
 
+    fun alarmEntity_init(){
+        intent.getSerializableExtra("alarmEntity").let {
+            if (it != null) {
+                viewModel.alarmEntity = it as AlarmEntity
+            }else{
+                viewModel.alarmEntity = AlarmEntity()
+            }
+        }
+    }
+
     private fun timeSettingRcleInit(recyclerView: RecyclerView){
         val snapHelper = LinearSnapHelper()
 
         snapHelper.attachToRecyclerView(recyclerView)
-        recyclerView.addOnScrollListener( getOnScrollListener(snapHelper))
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -60,22 +70,17 @@ class SettingActivity : AppCompatActivity() {
 
             when(recyclerView){
                 binding.hourSettingRcle -> {
+                    recyclerView.addOnScrollListener( viewModel.getOnScrollListener(snapHelper,viewModel.hourLiveData))
                     recyclerView.adapter = SettingHourAdapter()
                     recyclerView.scrollToPosition(Integer.MAX_VALUE/2-TO_ONE +9)}
                 binding.mintueSettingRcle -> {
+                    recyclerView.addOnScrollListener( viewModel.getOnScrollListener(snapHelper,viewModel.mintueLiveData))
                     recyclerView.adapter = SettingMintueAdapter()
                     recyclerView.scrollToPosition(Integer.MAX_VALUE/2-TO_ONE +19)}
             }
     }
 
     fun btn_init(){
-        intent.getSerializableExtra("alarmEntity").let {
-            if (it != null) {
-                viewModel.alarmEntity = it as AlarmEntity
-                }else{
-                viewModel.alarmEntity = AlarmEntity()
-            }
-        }
 
         binding.dayOfTheWeekTr.let{
             for(v in it.children){
@@ -86,26 +91,7 @@ class SettingActivity : AppCompatActivity() {
             }
         }
 
-        binding.configBtn.setOnClickListener({})
+        binding.configBtn.setOnClickListener({viewModel.configureClicked(this)})
     }
 
-    private fun getOnScrollListener(snapHelper: LinearSnapHelper): RecyclerView.OnScrollListener{
-
-        return object : RecyclerView.OnScrollListener(){
-            var lastView:TextView? = null
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == RecyclerView.SCROLL_STATE_IDLE){
-                    snapHelper.findSnapView(recyclerView.layoutManager)
-                        .let { val cardView = it as CardView
-                            val textView = cardView.getChildAt(0) as TextView
-                            lastView = textView
-                            textView.setTextColor(Color.BLUE)}
-                } else if(lastView != null){
-                    lastView?.setTextColor(Color.BLACK)
-                    lastView=null
-                }
-            }
-        }
-    }
 }

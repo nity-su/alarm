@@ -22,9 +22,9 @@ class AddAlarmUseCase(transformer:Transformer<Boolean>
         }
     }
 
-    fun save(entity:AlarmEntity){
+    fun save(entity:AlarmEntity): Observable<Boolean> {
         val data = HashMap<String,AlarmEntity>()
         data[PARAM_MOVIE_ENTITY] = entity
-        observable(data)
+        return observable(data)
     }
 }
