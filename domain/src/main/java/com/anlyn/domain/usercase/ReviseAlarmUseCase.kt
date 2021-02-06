@@ -1,6 +1,6 @@
 package com.anlyn.domain.usercase
 
-import com.anlyn.domain.AlarmCache
+import com.anlyn.domain.cache.AlarmCache
 import com.anlyn.domain.Transformer
 import io.reactivex.rxjava3.core.Observable
 

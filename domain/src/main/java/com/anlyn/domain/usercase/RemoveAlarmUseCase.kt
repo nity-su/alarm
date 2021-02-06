@@ -1,12 +1,12 @@
 package com.anlyn.domain.usercase
 
-import com.anlyn.domain.AlarmCache
+import com.anlyn.domain.cache.AlarmCache
 import com.anlyn.domain.Transformer
 import com.anlyn.domain.models.AlarmEntity
 import io.reactivex.rxjava3.core.Observable
 
 
-class RemoveAlarmUseCase(private val alarmCache: AlarmCache,transformer: Transformer<Boolean>) : UseCase<Boolean>(transformer){
+class RemoveAlarmUseCase(private val alarmCache: AlarmCache, transformer: Transformer<Boolean>) : UseCase<Boolean>(transformer){
     companion object {
         private const val PARAM_MOVIE_ENTITY = "movieEntity"
     }

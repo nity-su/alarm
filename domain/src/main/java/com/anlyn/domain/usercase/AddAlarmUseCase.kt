@@ -1,12 +1,14 @@
 package com.anlyn.domain.usercase
 
-import com.anlyn.domain.AlarmCache
+import com.anlyn.domain.cache.AlarmCache
 import com.anlyn.domain.models.AlarmEntity
 import com.anlyn.domain.Transformer
+import com.anlyn.domain.cache.AlarmMangerHelper
 import io.reactivex.rxjava3.core.Observable
 
 class AddAlarmUseCase(transformer:Transformer<Boolean>
-                        , private val alarmCache: AlarmCache) : UseCase<Boolean>(transformer) {
+                        , private val alarmCache: AlarmCache,private val alarmMangerHelper: AlarmMangerHelper
+) : UseCase<Boolean>(transformer) {
 
     companion object {
         private const val PARAM_MOVIE_ENTITY = "movieEntity"
@@ -17,6 +19,7 @@ class AddAlarmUseCase(transformer:Transformer<Boolean>
             return Observable.fromCallable {
                 val entity = data?.get(PARAM_MOVIE_ENTITY) as AlarmEntity
                 alarmCache.save(entity)
+                alarmMangerHelper.startAlarm(entity)
                 return@fromCallable true
             }
         }
