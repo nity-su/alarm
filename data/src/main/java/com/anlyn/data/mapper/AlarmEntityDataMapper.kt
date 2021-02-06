@@ -9,7 +9,8 @@ import javax.inject.Singleton
 class AlarmEntityDataMapper @Inject constructor() : Mapper<AlarmEntity,AlarmData>(){
     override fun mapFrom(from: AlarmEntity): AlarmData {
         return AlarmData(id = from.id,
-        time = from.time,
+        hour = from.hour,
+            minute = from.minute,
         mon = from.mon,
         teu = from.tue,
         wed = from.wed,
