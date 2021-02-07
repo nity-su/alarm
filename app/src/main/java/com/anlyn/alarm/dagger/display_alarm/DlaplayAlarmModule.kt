@@ -1,4 +1,4 @@
-package com.anlyn.alarm.Dagger.display_alarm
+package com.anlyn.alarm.dagger.display_alarm
 
 import androidx.lifecycle.ViewModel
 import com.anlyn.alarm.presentation.common.ASyncTransformer

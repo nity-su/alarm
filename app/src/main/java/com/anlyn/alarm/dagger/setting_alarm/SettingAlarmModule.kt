@@ -1,4 +1,4 @@
-package com.anlyn.alarm.Dagger.setting_alarm
+package com.anlyn.alarm.dagger.setting_alarm
 
 import android.content.Context
 import android.content.Intent
@@ -36,8 +36,8 @@ object SettingAlarmModule {
     }
     @JvmStatic
     @Provides
-    fun providesAlarmMangerHelper(context: Context,@Named("SettingActivity") intent: Intent):AlarmMangerHelper{
-        return AlarmMangerHelperImpl(context,intent)
+    fun providesAlarmMangerHelper(activity: SettingActivity,@Named("SettingActivity") intent: Intent):AlarmMangerHelper{
+        return AlarmMangerHelperImpl(activity.applicationContext,intent)
     }
 
 }

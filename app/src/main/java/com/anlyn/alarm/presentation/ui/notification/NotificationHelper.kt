@@ -10,14 +10,14 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 
 
-class NotificationHelper(base: Context?) : ContextWrapper(base) {
+class NotificationHelper(val base: Context?) : ContextWrapper(base) {
     companion object {
         val channelID = "channelID"
         val channelName = "Channel Name"
     }
     private var mManager: NotificationManager? = null
 
-    fun NotificationHelper(base: Context?) {
+    init{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel()
         }
@@ -37,12 +37,13 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
         return mManager
     }
 
-    fun getChannelNotification(): NotificationCompat.Builder? {
+    fun getChannelNotification(time:String): NotificationCompat.Builder? {
         return NotificationCompat.Builder(
             applicationContext,
             channelID
         )
             .setContentTitle("Alarm!")
-            .setContentText("Your AlarmManager is working.")
+            .setContentText("Your AlarmManager is working.\n"+time)
+            .setSmallIcon(R.drawable.ic_lock_idle_alarm)
     }
 }

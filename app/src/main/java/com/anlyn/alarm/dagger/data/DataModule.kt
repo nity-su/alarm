@@ -1,4 +1,4 @@
-package com.anlyn.alarm.Dagger.data
+package com.anlyn.alarm.dagger.data
 
 import android.content.Context
 import android.util.Log
