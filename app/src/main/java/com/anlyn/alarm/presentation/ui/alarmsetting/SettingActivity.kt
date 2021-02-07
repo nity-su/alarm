@@ -10,13 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.anlyn.alarm.BR
 import com.anlyn.alarm.databinding.ActivitySettingBinding
-import com.anlyn.alarm.presentation.entities.Alarm
+import com.anlyn.alarm.presentation.ui.alarmsetting.adapter.SettingHourAdapter
+import com.anlyn.alarm.presentation.ui.alarmsetting.adapter.SettingMintueAdapter
 import com.anlyn.domain.models.AlarmEntity
 import dagger.android.AndroidInjection
 import java.io.Serializable
@@ -35,15 +35,17 @@ class SettingActivity : AppCompatActivity() {
             return intent }
     }
     @Inject lateinit var factory:SettingVMFactory
+
     val viewModel : SettingViewModel by viewModels(){factory}
     val TAG = SettingActivity::class.simpleName
     lateinit var binding: ActivitySettingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.setVariable(BR.AlarmEntity,viewModel.alarmLiveData.value)
+        binding.setVariable(BR.model,viewModel)
         alarmEntity_init()
         timeSettingRcleInit( binding.mintueSettingRcle)
         timeSettingRcleInit(binding.hourSettingRcle)
@@ -56,8 +58,6 @@ class SettingActivity : AppCompatActivity() {
             var alarmEntity:AlarmEntity
             if (it != null) {
                 (viewModel.alarmLiveData as MutableLiveData).value = it as AlarmEntity
-            }else{
-                (viewModel.alarmLiveData as MutableLiveData).value  = AlarmEntity()
             }
         }
     }
@@ -74,11 +74,13 @@ class SettingActivity : AppCompatActivity() {
             when(recyclerView){
                 binding.hourSettingRcle -> {
                     recyclerView.addOnScrollListener( viewModel.getOnScrollListener(snapHelper,viewModel.hourLiveData))
-                    recyclerView.adapter = SettingHourAdapter()
+                    recyclerView.adapter =
+                        SettingHourAdapter()
                     recyclerView.scrollToPosition(Integer.MAX_VALUE/2-TO_ONE +9)}
                 binding.mintueSettingRcle -> {
-                    recyclerView.addOnScrollListener( viewModel.getOnScrollListener(snapHelper,viewModel.mintueLiveData))
-                    recyclerView.adapter = SettingMintueAdapter()
+                    recyclerView.addOnScrollListener( viewModel.getOnScrollListener(snapHelper,viewModel.minuteLiveData))
+                    recyclerView.adapter =
+                        SettingMintueAdapter()
                     recyclerView.scrollToPosition(Integer.MAX_VALUE/2-TO_ONE +19)}
             }
     }
@@ -89,15 +91,11 @@ class SettingActivity : AppCompatActivity() {
             for(v in it.children){
                 val btn = v as Button
                 btn.setOnClickListener(
-                    viewModel.dayOfTheWeekClicked(btn)
+                    viewModel.dayOfTheWeekClicked()
                 )
             }
         }
 
-        binding.configBtn.setOnClickListener({viewModel.configureClicked(this)})
-    }
-    @BindingAdapter(value = ["is_selected"])
-    fun isSelected(view: View, boolean: Boolean){
-        view.isSelected = boolean
+        binding.configBtn.setOnClickListener({ viewModel.configureClicked(binding,this) })
     }
 }

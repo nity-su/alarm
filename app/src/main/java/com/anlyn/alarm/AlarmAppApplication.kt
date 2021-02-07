@@ -2,7 +2,7 @@ package com.anlyn.alarm
 
 import android.app.Activity
 import android.app.Application
-import com.anlyn.alarm.Dagger.androidInjection.DaggerMainComponent
+import com.anlyn.alarm.dagger.androidInjection.DaggerMainComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

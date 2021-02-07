@@ -1,4 +1,4 @@
-package com.anlyn.alarm.presentation.ui.alarmsetting
+package com.anlyn.alarm.presentation.ui.alarmsetting.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,7 +14,9 @@ class SettingMintueAdapter() : RecyclerView.Adapter<SettingMintueAdapter.ViewHol
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val viewBinding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.mintue_cell,parent,false)
-        return ViewHolder(viewBinding)
+        return ViewHolder(
+            viewBinding
+        )
     }
 
     override fun getItemCount(): Int = Int.MAX_VALUE

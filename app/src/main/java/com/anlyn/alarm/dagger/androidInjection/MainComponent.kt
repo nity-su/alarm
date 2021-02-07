@@ -1,9 +1,9 @@
-package com.anlyn.alarm.Dagger.androidInjection
+package com.anlyn.alarm.dagger.androidInjection
 //lateinit property dispatchingAndroidInjector has not been initialized
 //https://stackoverflow.com/questions/53195678/lateinit-property-dispatchingandroidinjector-has-not-been-initialized
 import android.app.Application
 import com.anlyn.alarm.AlarmAppApplication
-import com.anlyn.alarm.Dagger.application.AppModule
+import com.anlyn.alarm.dagger.application.AppModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

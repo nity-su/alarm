@@ -1,4 +1,4 @@
-package com.anlyn.alarm.presentation.ui.alarmsetting
+package com.anlyn.alarm.presentation.ui.alarmsetting.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,11 +9,13 @@ import com.anlyn.alarm.BR
 import com.anlyn.alarm.R
 
 class SettingHourAdapter() : RecyclerView.Adapter<SettingHourAdapter.ViewHolder>() {
-    private val list = Array<Int>(12){i -> i+1}
+    private val list = Array<Int>(24){i -> i}
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.hour_cell,parent,false)
-        return ViewHolder(viewDataBinding)
+        return ViewHolder(
+            viewDataBinding
+        )
     }
 
     override fun getItemCount(): Int = Int.MAX_VALUE

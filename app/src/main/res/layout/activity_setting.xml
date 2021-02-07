@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="model"
+            type="com.anlyn.alarm.presentation.ui.alarmsetting.SettingViewModel" />
+
+    </data>
+    
+<androidx.constraintlayout.widget.ConstraintLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.alarmsetting.SettingActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hour_setting_rcle"
+        android:layout_width="32dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mintue_setting_rcle"
+        android:layout_width="32dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="취소" />
+
+        <Space
+            android:layout_width="96dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/config_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="확인" />
+
+    </TableRow>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10">
+
+        <TableRow
+            android:id="@+id/day_of_the_week_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/sun_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_effect"
+                android:text="일"
+                app:first_selected="@{model.alarmLiveData.sun}"/>
+
+            <Button
+                android:id="@+id/mon_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_effect"
+                android:text="월"
+                app:first_selected="@{model.alarmLiveData.mon}"/>
+
+            <Button
+                android:id="@+id/tue_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_effect"
+                android:text="화"
+                app:first_selected="@{model.alarmLiveData.tue}"/>
+
+            <Button
+                android:id="@+id/wed_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_effect"
+                android:text="수"
+                app:first_selected="@{model.alarmLiveData.wed}"/>
+
+            <Button
+                android:id="@+id/thu_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_effect"
+                android:text="목"
+                app:first_selected="@{model.alarmLiveData.thu}"/>
+
+            <Button
+                android:id="@+id/fri_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_effect"
+                android:text="금"
+                app:first_selected="@{model.alarmLiveData.fri}"/>
+
+            <Button
+                android:id="@+id/sat_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_effect"
+                android:text="토"
+                app:first_selected="@{model.alarmLiveData.sat}"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

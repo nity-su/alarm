@@ -1,4 +1,4 @@
-package com.anlyn.alarm.Dagger.viewmodel
+package com.anlyn.alarm.dagger.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
