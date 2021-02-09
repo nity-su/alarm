@@ -3,6 +3,7 @@ package com.anlyn.alarm.presentation.ui.alarmsetting
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -20,9 +21,10 @@ import com.anlyn.alarm.databinding.ActivitySettingBinding
 import com.anlyn.domain.models.AlarmEntity
 import com.anlyn.domain.usercase.AddAlarmUseCase
 
-class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase) : ViewModel(){
+class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,val binding:Lazy<ActivitySettingBinding>) : ViewModel(){
     val hourLiveData = MutableLiveData<Int>()
     val minuteLiveData = MutableLiveData<Int>()
+    lateinit var uri:Uri
     val alarmLiveData : LiveData<AlarmEntity> = MutableLiveData()
     init {
         (alarmLiveData as MutableLiveData).value = AlarmEntity()
@@ -47,7 +49,7 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase) : ViewModel(){
         }
     }
 
-    fun configureClicked(binding: ActivitySettingBinding,context: Activity){
+    fun configureClicked(binding: ActivitySettingBinding){
         alarmLiveData.value!!.hour = hourLiveData.value!!
         alarmLiveData.value!!.minute = minuteLiveData.value!!
         alarmLiveData.value!!.sun = binding.sunBtn.isSelected
@@ -89,15 +91,4 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase) : ViewModel(){
     }
 
 
-    fun getDayOfWeekMap(from: AlarmEntity):HashMap<Int,Boolean>{
-        val map = HashMap<Int,Boolean>()
-        map[R.id.mon_btn] = from.mon
-        map[R.id.tue_btn] = from.tue
-        map[R.id.wed_btn] = from.wed
-        map[R.id.thu_btn] = from.thu
-        map[R.id.fri_btn] = from.fri
-        map[R.id.sat_btn] = from.sat
-        map[R.id.sun_btn] = from.sun
-        return map
-    }
 }

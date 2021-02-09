@@ -1,6 +1,6 @@
 package com.anlyn.alarm.mapper
 
-import com.anlyn.alarm.presentation.entities.Alarm
+import com.anlyn.alarm.presentation.model.Alarm
 import com.anlyn.domain.Mapper
 import com.anlyn.domain.models.AlarmEntity
 
