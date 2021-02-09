@@ -1,14 +1,15 @@
 package com.anlyn.alarm.presentation.ui.alarmsetting
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -26,7 +27,7 @@ import javax.inject.Inject
 class SettingActivity : AppCompatActivity() {
     companion object{
        const val TO_ONE = 4;
-
+       const val MUSIC_PICKER_RQ_CODE =1001
         fun getCallingIntent(context: Context, alarmEntity: AlarmEntity?): Intent {
             val intent = Intent(context,SettingActivity::class.java)
             if(alarmEntity!=null)
@@ -96,6 +97,33 @@ class SettingActivity : AppCompatActivity() {
             }
         }
 
-        binding.configBtn.setOnClickListener({ viewModel.configureClicked(binding,this) })
+        binding.configBtn.setOnClickListener({ viewModel.configureClicked(binding) })
+
+        binding.musicPickerBtn.setOnClickListener({
+            val intent_upload = Intent(RingtoneManager.ACTION_RINGTONE_PICKER).apply {
+
+                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM)
+                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone")
+                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, "currentTone")
+                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
+                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
+                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_NOTIFICATION);
+            }
+            SettingActivity@this.startActivityForResult(intent_upload, MUSIC_PICKER_RQ_CODE)
+        })
+    }
+
+    fun setMusicUri(uri:Uri){
+        viewModel.uri = uri!!
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == MUSIC_PICKER_RQ_CODE)
+        {
+            if(resultCode == Activity.RESULT_OK){
+                setMusicUri(data?.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)!!)
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

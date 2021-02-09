@@ -73,6 +73,7 @@
     </TableRow>
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +93,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="일"
-                app:first_selected="@{model.alarmLiveData.sun}"/>
+                app:first_selected="@{model.alarmLiveData.sun}" />
 
             <Button
                 android:id="@+id/mon_btn"
@@ -101,7 +102,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="월"
-                app:first_selected="@{model.alarmLiveData.mon}"/>
+                app:first_selected="@{model.alarmLiveData.mon}" />
 
             <Button
                 android:id="@+id/tue_btn"
@@ -110,7 +111,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="화"
-                app:first_selected="@{model.alarmLiveData.tue}"/>
+                app:first_selected="@{model.alarmLiveData.tue}" />
 
             <Button
                 android:id="@+id/wed_btn"
@@ -119,7 +120,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="수"
-                app:first_selected="@{model.alarmLiveData.wed}"/>
+                app:first_selected="@{model.alarmLiveData.wed}" />
 
             <Button
                 android:id="@+id/thu_btn"
@@ -128,7 +129,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="목"
-                app:first_selected="@{model.alarmLiveData.thu}"/>
+                app:first_selected="@{model.alarmLiveData.thu}" />
 
             <Button
                 android:id="@+id/fri_btn"
@@ -137,7 +138,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="금"
-                app:first_selected="@{model.alarmLiveData.fri}"/>
+                app:first_selected="@{model.alarmLiveData.fri}" />
 
             <Button
                 android:id="@+id/sat_btn"
@@ -146,7 +147,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="토"
-                app:first_selected="@{model.alarmLiveData.sat}"/>
+                app:first_selected="@{model.alarmLiveData.sat}" />
 
         </TableRow>
 
@@ -158,6 +159,19 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/music_picker_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginBottom="181dp"
+        android:text="music"
+        app:layout_constraintBottom_toTopOf="@+id/tableRow2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
