@@ -1,5 +1,5 @@
 package com.anlyn.domain.models
-
+//1:1 for AlarmData
 class AlarmEntity(
     var id:Int = 0,
     var hour:Int = 0,
