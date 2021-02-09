@@ -6,6 +6,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ import com.anlyn.domain.models.AlarmEntity
 import dagger.android.AndroidInjection
 import java.io.Serializable
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class SettingActivity : AppCompatActivity() {
@@ -36,22 +38,21 @@ class SettingActivity : AppCompatActivity() {
             return intent }
     }
     @Inject lateinit var factory:SettingVMFactory
+    @Inject lateinit var binding: ActivitySettingBinding
 
     val viewModel : SettingViewModel by viewModels(){factory}
     val TAG = SettingActivity::class.simpleName
-    lateinit var binding: ActivitySettingBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingBinding.inflate(layoutInflater)
+        Log.d(TAG,binding.hashCode().toString())
         setContentView(binding.root)
         binding.setVariable(BR.model,viewModel)
         alarmEntity_init()
         timeSettingRcleInit( binding.mintueSettingRcle)
         timeSettingRcleInit(binding.hourSettingRcle)
-        btn_init()
-
     }
 
     fun alarmEntity_init(){
@@ -84,33 +85,6 @@ class SettingActivity : AppCompatActivity() {
                         SettingMintueAdapter()
                     recyclerView.scrollToPosition(Integer.MAX_VALUE/2-TO_ONE +19)}
             }
-    }
-
-    fun btn_init(){
-
-        binding.dayOfTheWeekTr.let{
-            for(v in it.children){
-                val btn = v as Button
-                btn.setOnClickListener(
-                    viewModel.dayOfTheWeekClicked()
-                )
-            }
-        }
-
-        binding.configBtn.setOnClickListener({ viewModel.configureClicked(binding) })
-
-        binding.musicPickerBtn.setOnClickListener({
-            val intent_upload = Intent(RingtoneManager.ACTION_RINGTONE_PICKER).apply {
-
-                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM)
-                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone")
-                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, "currentTone")
-                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
-                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
-                apply@this.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_NOTIFICATION);
-            }
-            SettingActivity@this.startActivityForResult(intent_upload, MUSIC_PICKER_RQ_CODE)
-        })
     }
 
     fun setMusicUri(uri:Uri){

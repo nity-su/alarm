@@ -1,14 +1,16 @@
 package com.anlyn.alarm.presentation.ui.alarmsetting
 
 import android.app.Activity
-import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.media.RingtoneManager
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.view.children
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,12 +23,17 @@ import com.anlyn.alarm.databinding.ActivitySettingBinding
 import com.anlyn.domain.models.AlarmEntity
 import com.anlyn.domain.usercase.AddAlarmUseCase
 
-class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,val binding:Lazy<ActivitySettingBinding>) : ViewModel(){
+class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
+                       private val binding:ActivitySettingBinding) : ViewModel(){
+    private val TAG = SettingViewModel::class.simpleName
+//    private val binding = bindingLazy.get()
+
     val hourLiveData = MutableLiveData<Int>()
     val minuteLiveData = MutableLiveData<Int>()
     lateinit var uri:Uri
     val alarmLiveData : LiveData<AlarmEntity> = MutableLiveData()
     init {
+        Log.d(TAG,binding.hashCode().toString())
         (alarmLiveData as MutableLiveData).value = AlarmEntity()
     }
 //    var alarmEntity: AlarmEntity? =null
@@ -34,22 +41,40 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,val binding:Lazy<Act
 //        set(value) {field=value
 //            map = getDayOfWeekMap(value!!)}
 
-    private lateinit var map:Map<Int,Boolean>
 
     fun dayOfTheWeekClicked():View.OnClickListener{
-        return object : View.OnClickListener{
+        return object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val btn = v as Button
-
-                when(btn.isSelected) {
+                when (btn.isSelected) {
                     true -> btn.isSelected = false
                     false -> btn.isSelected = true
                 }
             }
         }
+
     }
 
-    fun configureClicked(binding: ActivitySettingBinding){
+    fun musicPickBtnClicked(view:View){
+        var activity: Activity
+        if(view.context is SettingActivity)
+            activity = view.context as Activity
+        else
+            throw Exception("activity is not SettingActivity")
+
+        val intent_upload = Intent(RingtoneManager.ACTION_RINGTONE_PICKER).apply {
+
+            this.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM)
+            this.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone")
+            this.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, "currentTone")
+            this.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
+            this.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
+            this.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
+        }
+        activity.startActivityForResult(intent_upload, SettingActivity.MUSIC_PICKER_RQ_CODE)
+    }
+
+    fun configureClicked(){
         alarmLiveData.value!!.hour = hourLiveData.value!!
         alarmLiveData.value!!.minute = minuteLiveData.value!!
         alarmLiveData.value!!.sun = binding.sunBtn.isSelected

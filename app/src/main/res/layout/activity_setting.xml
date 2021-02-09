@@ -68,6 +68,7 @@
             android:id="@+id/config_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{()->model.configureClicked()}"
             android:text="확인" />
 
     </TableRow>
@@ -93,6 +94,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="일"
+                android:onClick="@{model.dayOfTheWeekClicked()}"
                 app:first_selected="@{model.alarmLiveData.sun}" />
 
             <Button
@@ -102,6 +104,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="월"
+                android:onClick="@{model.dayOfTheWeekClicked()}"
                 app:first_selected="@{model.alarmLiveData.mon}" />
 
             <Button
@@ -111,6 +114,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="화"
+                android:onClick="@{model.dayOfTheWeekClicked()}"
                 app:first_selected="@{model.alarmLiveData.tue}" />
 
             <Button
@@ -120,6 +124,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="수"
+                android:onClick="@{model.dayOfTheWeekClicked()}"
                 app:first_selected="@{model.alarmLiveData.wed}" />
 
             <Button
@@ -129,6 +134,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="목"
+                android:onClick="@{model.dayOfTheWeekClicked()}"
                 app:first_selected="@{model.alarmLiveData.thu}" />
 
             <Button
@@ -138,6 +144,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="금"
+                android:onClick="@{model.dayOfTheWeekClicked()}"
                 app:first_selected="@{model.alarmLiveData.fri}" />
 
             <Button
@@ -147,6 +154,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
                 android:text="토"
+                android:onClick="@{model.dayOfTheWeekClicked()}"
                 app:first_selected="@{model.alarmLiveData.sat}" />
 
         </TableRow>
@@ -168,6 +176,7 @@
         android:layout_marginTop="135dp"
         android:layout_marginBottom="181dp"
         android:text="music"
+        android:onClick="@{view->model.musicPickBtnClicked(view)}"
         app:layout_constraintBottom_toTopOf="@+id/tableRow2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout"
