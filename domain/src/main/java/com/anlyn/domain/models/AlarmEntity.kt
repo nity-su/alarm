@@ -1,5 +1,5 @@
 package com.anlyn.domain.models
-
+//1:1 for AlarmData
 class AlarmEntity(
     val id:Int,
     val time:Int,
