@@ -1,12 +1,12 @@
 package com.anlyn.domain.usercase
 
-import com.anlyn.domain.cache.AlarmCache
+import com.anlyn.domain.Repository.LocalRepository
 import com.anlyn.domain.Transformer
 import com.anlyn.domain.models.AlarmEntity
 import io.reactivex.rxjava3.core.Observable
 
 
-class RemoveAlarmUseCase(private val alarmCache: AlarmCache, transformer: Transformer<Boolean>) : UseCase<Boolean>(transformer){
+class RemoveAlarmUseCase(private val localRepo: LocalRepository, transformer: Transformer<Boolean>) : UseCase<Boolean>(transformer){
     companion object {
         private const val PARAM_MOVIE_ENTITY = "movieEntity"
     }
@@ -14,7 +14,7 @@ class RemoveAlarmUseCase(private val alarmCache: AlarmCache, transformer: Transf
         val alarmEntity = data?.get(PARAM_MOVIE_ENTITY) as AlarmEntity
         alarmEntity.let {
             return Observable.fromCallable {
-                alarmCache.remove(it)
+                localRepo.remove(it)
                 return@fromCallable true
             }
         }

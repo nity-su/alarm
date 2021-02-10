@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.anlyn.alarm.presentation.common.ASyncTransformer
 import com.anlyn.alarm.presentation.ui.displayalarm.DisplayAlarmVMFactory
 import com.anlyn.alarm.presentation.ui.displayalarm.DisplayAlarmViewModel
-import com.anlyn.domain.cache.AlarmCache
+import com.anlyn.data.db.local.RoomAlarmDataSource
+import com.anlyn.domain.Repository.LocalRepository
 import com.anlyn.domain.usercase.GetAllAlarmUseCase
 import dagger.Module
 import dagger.Provides
@@ -15,8 +16,8 @@ object DisplayAlarmModule {
     @Provides
     @JvmStatic
     @Named("getAllAlarmUseCase")
-    fun ProvidesGetAllAlarmUseCase(@Named("AlarmCache")  alarmCache: AlarmCache): GetAllAlarmUseCase{
-        return GetAllAlarmUseCase(ASyncTransformer(),alarmCache)
+    fun ProvidesGetAllAlarmUseCase(@Named("LocalRepo")  localRepo: LocalRepository): GetAllAlarmUseCase{
+        return GetAllAlarmUseCase(ASyncTransformer(),localRepo)
     }
     @Provides
     @JvmStatic

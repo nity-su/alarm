@@ -87,15 +87,15 @@ class SettingActivity : AppCompatActivity() {
             }
     }
 
-    fun setMusicUri(uri:Uri){
-        viewModel.uri = uri!!
+    fun setMusicPath(path:String){
+        viewModel.path = path
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == MUSIC_PICKER_RQ_CODE)
         {
             if(resultCode == Activity.RESULT_OK){
-                setMusicUri(data?.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)!!)
+                setMusicPath(data?.data!!.path!!)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

@@ -3,11 +3,12 @@ package com.anlyn.alarm.dagger.data
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
+import com.anlyn.data.db.LocalRepositoryImpl
 import com.anlyn.data.db.local.AppDataBase
-import com.anlyn.data.db.local.RoomAlarmCache
+import com.anlyn.data.db.local.RoomAlarmDataSource
 import com.anlyn.data.mapper.AlarmDataEntityMapper
 import com.anlyn.data.mapper.AlarmEntityDataMapper
-import com.anlyn.domain.cache.AlarmCache
+import com.anlyn.domain.Repository.LocalRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -29,14 +30,21 @@ import javax.inject.Named
         }
         @JvmStatic
         @Provides
-        @Named("AlarmCache")
-        fun providesRoomAlarmCache(
+        @Named("RoomAlarmDataSource")
+        fun providesRoomAlarmDataSource(
             database: AppDataBase,
             alarmDataEntityMapper: AlarmDataEntityMapper,
             alarmEntityDataMapper: AlarmEntityDataMapper
-        ): AlarmCache {
-            Log.d("RoomAlarmCache", "exe")
-            return RoomAlarmCache(database, alarmEntityDataMapper, alarmDataEntityMapper)
+        ): RoomAlarmDataSource {
+            Log.d("RoomAlarmDataSource", "exe")
+            return RoomAlarmDataSource(database, alarmEntityDataMapper, alarmDataEntityMapper)
+        }
+
+        @JvmStatic
+        @Provides
+        @Named("LocalRepo")
+        fun providesLocalRepo(@Named("RoomAlarmDataSource") dataSource: RoomAlarmDataSource):LocalRepository{
+            return LocalRepositoryImpl(dataSource)
         }
     }
 

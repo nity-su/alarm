@@ -1,12 +1,13 @@
-package com.anlyn.domain.cache
+package com.anlyn.domain.Repository
 
 import com.anlyn.domain.models.AlarmEntity
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
+import java.util.*
 
-public interface AlarmCache{
+interface LocalRepository {
 
-    fun save(alarmEntity: AlarmEntity)
-    fun get(alarmID:Int):Observable<AlarmEntity>
     fun getAll():Observable<List<AlarmEntity>>
+    fun addAlarm(alarmEntity: AlarmEntity)
     fun remove(alarmEntity: AlarmEntity)
 }

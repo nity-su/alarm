@@ -30,7 +30,7 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
 
     val hourLiveData = MutableLiveData<Int>()
     val minuteLiveData = MutableLiveData<Int>()
-    lateinit var uri:Uri
+    lateinit var path:String
     val alarmLiveData : LiveData<AlarmEntity> = MutableLiveData()
     init {
         Log.d(TAG,binding.hashCode().toString())
@@ -62,14 +62,8 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
         else
             throw Exception("activity is not SettingActivity")
 
-        val intent_upload = Intent(RingtoneManager.ACTION_RINGTONE_PICKER).apply {
-
-            this.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM)
-            this.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone")
-            this.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, "currentTone")
-            this.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
-            this.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
-            this.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
+        val intent_upload = Intent(Intent.ACTION_GET_CONTENT).apply {
+            this.setType("audio/*")
         }
         activity.startActivityForResult(intent_upload, SettingActivity.MUSIC_PICKER_RQ_CODE)
     }

@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anlyn.alarm.databinding.ActivityDisplayAlarmBinding
 import com.anlyn.alarm.presentation.navigation.Navigator
-import com.anlyn.domain.cache.AlarmCache
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 import javax.inject.Named
@@ -20,8 +19,8 @@ class DisplayAlarmActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory : DisplayAlarmVMFactory
-    @Inject @field:Named("AlarmCache")
-    lateinit var cache: AlarmCache
+//    @Inject @field:Named("AlarmCache")
+
     @Inject
     lateinit var navigator: Navigator
     lateinit var binding : ActivityDisplayAlarmBinding
