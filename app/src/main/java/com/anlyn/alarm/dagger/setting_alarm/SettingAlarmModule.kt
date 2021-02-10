@@ -9,7 +9,8 @@ import com.anlyn.alarm.presentation.ui.alarmsetting.SettingActivity
 import com.anlyn.alarm.presentation.ui.alarmsetting.SettingVMFactory
 import com.anlyn.alarm.presentation.ui.notification.AlterNotification
 import com.anlyn.data.alarmmanger.AlarmMangerHelperImpl
-import com.anlyn.domain.cache.AlarmCache
+import com.anlyn.data.db.local.RoomAlarmDataSource
+import com.anlyn.domain.Repository.LocalRepository
 import com.anlyn.domain.cache.AlarmMangerHelper
 import com.anlyn.domain.usercase.AddAlarmUseCase
 import dagger.Lazy
@@ -21,8 +22,9 @@ import javax.inject.Named
 object SettingAlarmModule {
     @JvmStatic
     @Provides
-    fun providesAddAlarmUseCase(@Named("AlarmCache") alarmCache: AlarmCache,alarmMangerHelper: AlarmMangerHelper):AddAlarmUseCase{
-        return AddAlarmUseCase(ASyncTransformer(),alarmCache,alarmMangerHelper)
+    fun providesAddAlarmUseCase(@Named("LocalRepo") localRepo: LocalRepository,
+                                alarmMangerHelper: AlarmMangerHelper):AddAlarmUseCase{
+        return AddAlarmUseCase(ASyncTransformer(),localRepo,alarmMangerHelper)
     }
 
     @JvmStatic

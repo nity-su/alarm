@@ -44,6 +44,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.wear:wear:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -55,6 +56,7 @@ dependencies {
 //    kapt "androidx.room:room-compiler:$room_version"
     implementation project(":domain")
     implementation project(":data")
+    compileOnly 'com.google.android.wearable:wearable:2.8.1'
     ext.dagger_version = "2.20"
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version" // if you use the support libraries

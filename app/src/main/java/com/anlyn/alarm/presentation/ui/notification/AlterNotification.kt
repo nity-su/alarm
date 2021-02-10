@@ -6,6 +6,8 @@ import android.content.Intent
 import java.util.concurrent.TimeUnit
 
 class AlterNotification : BroadcastReceiver(){
+    //notification 제거 음악 중지
+    //notification click -> 받아쓰기 Activity 생성
     override fun onReceive(context: Context?, intent: Intent?) {
         val id = intent?.getIntExtra("id",0)
         val mils = intent?.getLongExtra("mils",0)!!
