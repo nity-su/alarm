@@ -1,4 +1,5 @@
 package com.anlyn.domain.models
+//use this in usecase
 //1:1 for AlarmData
 class AlarmEntity(
     var id:Int = 0,

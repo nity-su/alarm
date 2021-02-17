@@ -19,9 +19,11 @@ import com.anlyn.alarm.BR
 import com.anlyn.alarm.databinding.ActivitySettingBinding
 import com.anlyn.alarm.presentation.ui.alarmsetting.adapter.SettingHourAdapter
 import com.anlyn.alarm.presentation.ui.alarmsetting.adapter.SettingMintueAdapter
+import com.anlyn.alarm.presentation.ui.ringingalarm.RingingActivity
 import com.anlyn.domain.models.AlarmEntity
 import dagger.android.AndroidInjection
 import java.io.Serializable
+import java.net.URI
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -53,6 +55,7 @@ class SettingActivity : AppCompatActivity() {
         alarmEntity_init()
         timeSettingRcleInit( binding.mintueSettingRcle)
         timeSettingRcleInit(binding.hourSettingRcle)
+        Log.d("package", RingingActivity::class.java.`package`.toString())
     }
 
     fun alarmEntity_init(){
@@ -87,15 +90,15 @@ class SettingActivity : AppCompatActivity() {
             }
     }
 
-    fun setMusicPath(path:String){
-        viewModel.path = path
+    fun setMusicPath(uri: Uri){
+        viewModel.musicUriStr = uri.toString()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == MUSIC_PICKER_RQ_CODE)
         {
             if(resultCode == Activity.RESULT_OK){
-                setMusicPath(data?.data!!.path!!)
+                setMusicPath(data?.data!!)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

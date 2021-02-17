@@ -3,25 +3,20 @@ package com.anlyn.alarm.presentation.ui.alarmsetting
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.media.RingtoneManager
-import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.view.children
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.anlyn.alarm.BR
-import com.anlyn.alarm.R
 import com.anlyn.alarm.databinding.ActivitySettingBinding
 import com.anlyn.domain.models.AlarmEntity
 import com.anlyn.domain.usercase.AddAlarmUseCase
+import java.net.URI
 
 class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
                        private val binding:ActivitySettingBinding) : ViewModel(){
@@ -30,7 +25,7 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
 
     val hourLiveData = MutableLiveData<Int>()
     val minuteLiveData = MutableLiveData<Int>()
-    lateinit var path:String
+    lateinit var musicUriStr:String
     val alarmLiveData : LiveData<AlarmEntity> = MutableLiveData()
     init {
         Log.d(TAG,binding.hashCode().toString())
@@ -62,9 +57,7 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
         else
             throw Exception("activity is not SettingActivity")
 
-        val intent_upload = Intent(Intent.ACTION_GET_CONTENT).apply {
-            this.setType("audio/*")
-        }
+        val intent_upload = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI)
         activity.startActivityForResult(intent_upload, SettingActivity.MUSIC_PICKER_RQ_CODE)
     }
 
@@ -78,12 +71,13 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
         alarmLiveData.value!!.thu = binding.thuBtn.isSelected
         alarmLiveData.value!!.fri = binding.friBtn.isSelected
         alarmLiveData.value!!.sat = binding.satBtn.isSelected
+        alarmLiveData.value!!.musicUriStr = musicUriStr
 
         addAlarmUseCase.save(alarmLiveData.value!!)
             .subscribe({
         Log.d("isSave:","true")}
             ,{
-                    Log.d("isSave:",it.message)
+                    Log.d("isSave:","false")
 //                    context.finish()
                 })
     }
