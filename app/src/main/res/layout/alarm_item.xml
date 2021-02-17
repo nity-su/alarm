@@ -21,8 +21,9 @@
             android:id="@+id/textView8"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="TextView"
             android:textSize="24sp"
+            app:hour="@{AlarmEntity.hour}"
+            app:minute="@{AlarmEntity.minute}"
             app:layout_constraintBottom_toTopOf="@+id/guideline8"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintHorizontal_bias="0.137"
@@ -54,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@{AlarmEntity.mon ? @color/colorAccent : @android:color/tab_indicator_text }"
                 android:text="월" />
 
             <TextView
@@ -61,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@{AlarmEntity.tue ? @color/colorAccent : @android:color/tab_indicator_text }"
                 android:text="화" />
 
             <TextView
@@ -68,6 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@{AlarmEntity.wed ? @color/colorAccent : @android:color/tab_indicator_text }"
                 android:text="수" />
 
             <TextView
@@ -75,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@{AlarmEntity.thu ? @color/colorAccent : @android:color/tab_indicator_text }"
                 android:text="목" />
 
             <TextView
@@ -82,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@{AlarmEntity.fri ? @color/colorAccent : @android:color/tab_indicator_text }"
                 android:text="금" />
 
             <TextView
@@ -89,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@{AlarmEntity.sat ? @color/colorAccent : @android:color/tab_indicator_text }"
                 android:text="토" />
         </TableRow>
 

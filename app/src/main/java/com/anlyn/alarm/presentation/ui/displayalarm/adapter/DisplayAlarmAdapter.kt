@@ -1,4 +1,4 @@
-package com.anlyn.alarm.presentation.ui.displayalarm
+package com.anlyn.alarm.presentation.ui.displayalarm.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

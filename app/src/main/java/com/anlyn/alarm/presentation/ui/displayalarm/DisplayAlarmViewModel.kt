@@ -20,8 +20,5 @@ class DisplayAlarmViewModel (val getAllAlarmUseCase: GetAllAlarmUseCase) : ViewM
 
 //        alarmCacheLiveData.value =
     }
-    fun dadsd(activity: AppCompatActivity){
 
-
-    }
 }

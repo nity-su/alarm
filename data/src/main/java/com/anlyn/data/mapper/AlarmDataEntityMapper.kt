@@ -12,6 +12,7 @@ class AlarmDataEntityMapper @Inject constructor():Mapper<AlarmData,AlarmEntity>(
         return AlarmEntity(id = from.id,
             hour = from.hour,
             minute = from.minute,
+            musicUriStr = from.musicUriStr,
             mon = from.mon,
             tue = from.teu,
             wed = from.wed,
