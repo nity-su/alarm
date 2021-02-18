@@ -5,7 +5,7 @@
 #### Retrofit2
 #### LiveData + ViewModel
 #### Room DB
-#### RxJAva3
+#### RxJva3
 #### RxAndoird
 #### DataBinding
 
