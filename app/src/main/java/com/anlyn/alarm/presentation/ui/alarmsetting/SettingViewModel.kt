@@ -61,7 +61,7 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
         activity.startActivityForResult(intent_upload, SettingActivity.MUSIC_PICKER_RQ_CODE)
     }
 
-    fun configureClicked(){
+    fun configureClicked(view:View){
         alarmLiveData.value!!.hour = hourLiveData.value!!
         alarmLiveData.value!!.minute = minuteLiveData.value!!
         alarmLiveData.value!!.sun = binding.sunBtn.isSelected
@@ -75,7 +75,8 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
 
         addAlarmUseCase.save(alarmLiveData.value!!)
             .subscribe({
-        Log.d("isSave:","true")}
+        Log.d("isSave:","true")
+                (view.context as Activity).finish()}
             ,{
                     Log.d("isSave:","false")
 //                    context.finish()

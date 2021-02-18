@@ -11,13 +11,13 @@ class AddAlarmUseCase(transformer:Transformer<Boolean>
 ) : UseCase<Boolean>(transformer) {
 
     companion object {
-        private const val PARAM_MOVIE_ENTITY = "movieEntity"
+        private const val PARAM_ALARM_ENTITY = "movieEntity"
     }
 
     override fun createObservable(data:Map<String,Any?>?): Observable<Boolean> {
         data.let {
             return Observable.fromCallable {
-                val entity = data?.get(PARAM_MOVIE_ENTITY) as AlarmEntity
+                val entity = data?.get(PARAM_ALARM_ENTITY) as AlarmEntity
                 localRepo.addAlarm(entity)
                 alarmMangerHelper.startAlarm(entity)
                 return@fromCallable true
@@ -27,7 +27,7 @@ class AddAlarmUseCase(transformer:Transformer<Boolean>
 
     fun save(entity:AlarmEntity): Observable<Boolean> {
         val data = HashMap<String,AlarmEntity>()
-        data[PARAM_MOVIE_ENTITY] = entity
+        data[PARAM_ALARM_ENTITY] = entity
         return observable(data)
     }
 }

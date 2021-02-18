@@ -2,7 +2,7 @@ package com.anlyn.domain.models
 
 //use this in usecase
 //1:1 for AlarmData
-class AlarmEntity(
+data class AlarmEntity(
     var id:Int = 0,
     var hour:Int = 0,
     var minute:Int =0,

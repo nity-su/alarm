@@ -42,13 +42,11 @@ class DisplayAlarmActivity : AppCompatActivity() {
     fun initUI(){
         val model : DisplayAlarmViewModel by viewModels() { factory }
         val adapter =
-            DisplayAlarmAdapter(
-                model.alarmCacheLiveData.value
-            )
-        Log.d(TAG,"size:"+model.alarmCacheLiveData.value?.size.toString())
+            DisplayAlarmAdapter(model.alarmLiveData.value,model)
+        Log.d(TAG,"size:"+model.alarmLiveData.value?.size.toString())
         binding.recylerView.layoutManager = LinearLayoutManager(applicationContext)
         binding.recylerView.adapter = adapter
-        model.alarmCacheLiveData.observe(this, Observer {
+        model.alarmLiveData.observe(this, Observer {
             adapter.setList(it)
         })
 

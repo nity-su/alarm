@@ -1,8 +1,12 @@
 package com.anlyn.alarm.dagger.data
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.room.Room
+import com.anlyn.alarm.dagger.setting_alarm.SettingAlarmModule
+import com.anlyn.alarm.presentation.ui.alarmsetting.SettingActivity
+import com.anlyn.alarm.presentation.ui.notification.AlterNotification
 import com.anlyn.data.db.LocalRepositoryImpl
 import com.anlyn.data.db.RemoteRepositoryImpl
 import com.anlyn.data.db.local.AppDataBase
@@ -53,7 +57,6 @@ object DataModule{
             return LocalRepositoryImpl(dataSource)
         }
 
-
         @JvmStatic
         @Provides
         fun providesPhraseDataSource(mapper: AlarmQuestionEntityMapper):PhraseDataSource
@@ -63,7 +66,6 @@ object DataModule{
         @Provides
         @Named("RemoteRepoImpl")
         fun providesRemoteRepository(source: PhraseDataSource): RemoteRepository = RemoteRepositoryImpl(source)
-
 
 
 }

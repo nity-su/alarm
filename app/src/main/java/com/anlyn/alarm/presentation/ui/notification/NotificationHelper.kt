@@ -8,13 +8,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
-import com.anlyn.data.MediaPlayer
 import android.os.Build
-import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import com.anlyn.alarm.presentation.ui.ringingalarm.RingingActivity
-import java.io.Serializable
-import java.net.URI
 
 
 class NotificationHelper(val base: Context?) : ContextWrapper(base) {
@@ -44,7 +40,7 @@ class NotificationHelper(val base: Context?) : ContextWrapper(base) {
         return mManager
     }
 
-    fun getChannelNotification(id:Int,time:String,path:String): NotificationCompat.Builder? {
+    fun getChannelNotification(id:Int,path:String?): NotificationCompat.Builder? {
         val ringingIntent = Intent(base,RingingActivity::class.java).apply {
             this.putExtra("path",path)
             this.putExtra("id",id)
@@ -57,9 +53,9 @@ class NotificationHelper(val base: Context?) : ContextWrapper(base) {
             channelID
         )
             .setContentTitle("Alarm!")
-            .setContentText("Your AlarmManager is working.\n"+time)
+            .setContentText("Your AlarmManager is working.")
             .setSmallIcon(R.drawable.ic_lock_idle_alarm)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setAutoCancel(true) //touch cancel
             .setOngoing(true)
@@ -67,4 +63,3 @@ class NotificationHelper(val base: Context?) : ContextWrapper(base) {
 
     }
 }
-//            .setContentIntent(PendingIntent.getActivity(base,1, intent,0))

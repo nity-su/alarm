@@ -15,7 +15,8 @@ import javax.inject.Inject
 
 //https://proandroiddev.com/android-alarmmanager-as-deep-as-possible-909bd5b64792
 // AlarmManager will not be called with locked screen and enabled energy saving mode
-class AlarmMangerHelperImpl @Inject constructor(val context: Context, val intent:Intent): AlarmMangerHelper {//
+class AlarmMangerHelperImpl constructor(val context: Context, val intent:Intent?): AlarmMangerHelper {//
+
     val TAG = AlarmMangerHelperImpl::class.simpleName
     private var calendar = Calendar.getInstance()
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
@@ -32,6 +33,7 @@ class AlarmMangerHelperImpl @Inject constructor(val context: Context, val intent
     override fun cancelAlarm(alarmEntity: AlarmEntity) {
         hour = alarmEntity.hour
         minute = alarmEntity.minute
+        musicUriStr = alarmEntity.musicUriStr!!
         alarmSetDayOfWeek(alarmEntity,this::cancel)
     }
 
@@ -81,17 +83,21 @@ class AlarmMangerHelperImpl @Inject constructor(val context: Context, val intent
 
         val requestCode = getRequestCode(chk_week)
 
-        intent.putExtra("id",requestCode)
-            .putExtra("mils",targetZdtMils)
+        intent!!.putExtra("id",requestCode)
             .putExtra("uri",musicUriStr)
         val pendingIntent = PendingIntent.getBroadcast(context,requestCode ,
-            intent,0) //this
+            intent,PendingIntent.FLAG_UPDATE_CURRENT) //this
         alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, targetZdtMils,
             7*24*60*60*1000, pendingIntent)
     }
 
     private fun cancel(chk_week:Int){
-        val pendingIntent = PendingIntent.getBroadcast(context, getRequestCode(chk_week), intent, 0) //this
+        val requestCode = getRequestCode(chk_week)
+        Log.d("minute",minute.toString())
+        intent!!.putExtra("id",requestCode)
+            .putExtra("uri",musicUriStr)
+        val pendingIntent = PendingIntent.getBroadcast(context, requestCode,
+            intent, PendingIntent.FLAG_UPDATE_CURRENT) //this
         alarmManager!!.cancel(pendingIntent);
     }
 

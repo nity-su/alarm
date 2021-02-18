@@ -6,6 +6,10 @@
         <variable
             name="AlarmEntity"
             type="com.anlyn.domain.models.AlarmEntity" />
+
+        <variable
+            name="model"
+            type="com.anlyn.alarm.presentation.ui.displayalarm.DisplayAlarmViewModel" />
     </data>
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
@@ -155,12 +159,15 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.55" />
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/alarmDeleteBtn"
+            android:layout_width="40dp"
+            android:layout_height="39dp"
             android:layout_marginEnd="24dp"
-            android:text="Switch"
+            android:background="@drawable/ic_baseline_delete_24"
+            app:listener="@{model.deleteAlarmEntity()}"
+            app:alarm_entity="@{AlarmEntity}"
+            app:live_data="@{model.alarmLiveData}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

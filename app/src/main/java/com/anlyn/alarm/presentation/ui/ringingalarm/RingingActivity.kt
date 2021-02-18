@@ -31,8 +31,11 @@ class RingingActivity : AppCompatActivity() {
         @Inject lateinit var binding : ActivityRingingBinding
         @Inject lateinit var factory: RingingVMFactory
 
+        private lateinit var mManager : NotificationManager
         private val c:Context = this
-        private val viewModel: RingingViewModel by lazy <RingingViewModel>{
+        private var id:Int? = intent?.getIntExtra("id",0)
+        private var dialog:AlertDialog? = null
+    private val viewModel: RingingViewModel by lazy <RingingViewModel>{
             val model by viewModels<RingingViewModel> { factory }
             model
         }
@@ -43,20 +46,18 @@ class RingingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.setVariable(BR.ringingModel,viewModel)
+        mManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val path=intent.getStringExtra("path") ?: ""
 
-        val id = intent?.getIntExtra("id",0)
-        val mManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-        mManager!!.cancel(id!!)
         ////wifi on/off여부 후 dialog builder.build
         viewModel.getPhrase()
-            .subscribe({phrase -> val dialog = dialogCreate(phrase.sentence)
-                dialog.show()
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener({
+            .subscribe({phrase -> dialog = dialogCreate(phrase.sentence)
+                dialog?.show()
+                dialog?.getButton(AlertDialog.BUTTON_POSITIVE)!!.setOnClickListener({
                 val root = it.rootView
                     val editText = root.findViewById<TextView>(R.id.userInputDialog)
                     if(editText.text.toString().equals(phrase.sentence)){
-                        dialog.dismiss()
+                        dialog?.dismiss()
                     }
                 })}
             ,{})
@@ -65,6 +66,7 @@ class RingingActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         MediaPlayer.stop()
+        dialog?.dismiss()
         super.onDestroy()
     }
 

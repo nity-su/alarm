@@ -47,16 +47,11 @@ object SettingAlarmModule {
                                       binding:ActivitySettingBinding):SettingVMFactory{
         return SettingVMFactory(addAlarmUseCase,binding)
     }
+
     @JvmStatic
     @Provides
-    @Named("intentAlterNotification")
-    fun providesAlarmMangerIntent(activity: SettingActivity):Intent{
-        Log.d(SettingAlarmModule::class.simpleName,"exe")
-        return Intent(activity.applicationContext, AlterNotification::class.java)
-    }
-    @JvmStatic
-    @Provides
-    fun providesAlarmMangerHelper(activity: SettingActivity,@Named("intentAlterNotification") intent: Intent):AlarmMangerHelper{
+    fun providesAlarmMangerHelper(activity: SettingActivity):AlarmMangerHelper{
+        val intent = Intent(activity.applicationContext, AlterNotification::class.java)
         return AlarmMangerHelperImpl(activity.applicationContext,intent)
     }
 

@@ -16,6 +16,6 @@ class LocalRepositoryImpl (val datasource: RoomAlarmDataSource) : LocalRepositor
     }
 
     override fun remove(alarmEntity: AlarmEntity) {
-        TODO("Not yet implemented")
+        datasource.remove(alarmEntity)
     }
 }
