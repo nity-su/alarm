@@ -1,6 +1,7 @@
 package com.anlyn.alarm.presentation.ui.displayalarm
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -68,6 +69,8 @@ class DisplayAlarmActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode==REQUEST_CODE && resultCode == Activity.RESULT_OK)
+        binding.recylerView.adapter?.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)
     }
 

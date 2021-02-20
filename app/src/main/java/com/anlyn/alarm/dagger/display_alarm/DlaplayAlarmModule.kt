@@ -37,14 +37,6 @@ object DisplayAlarmModule {
             getAllAlarmUseCase,removeAlarmUseCase
         )
     }
-//    @Provides
-//    @JvmStatic
-//    fun providesAlarmListViewModel(@Named("getAllAlarmUseCase") getAllAlarmUseCase: GetAllAlarmUseCase,
-//                                   removeAlarmUseCase: RemoveAlarmUseCase) : ViewModel{
-//        return DisplayAlarmViewModel(
-//            getAllAlarmUseCase,removeAlarmUseCase
-//        )
-//    }
 
     @JvmStatic
     @Provides

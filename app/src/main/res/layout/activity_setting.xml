@@ -30,17 +30,24 @@
         app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/TopOfdayOfWeek"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mintue_setting_rcle"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginLeft="64dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +86,7 @@
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10">
+        app:layout_constraintTop_toTopOf="@+id/TopOfdayOfWeek">
 
         <TableRow
             android:id="@+id/day_of_the_week_tr"
@@ -93,8 +100,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
-                android:text="일"
                 android:onClick="@{model.dayOfTheWeekClicked()}"
+                android:text="일"
                 app:first_selected="@{model.alarmLiveData.sun}" />
 
             <Button
@@ -103,8 +110,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
-                android:text="월"
                 android:onClick="@{model.dayOfTheWeekClicked()}"
+                android:text="월"
                 app:first_selected="@{model.alarmLiveData.mon}" />
 
             <Button
@@ -113,8 +120,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
-                android:text="화"
                 android:onClick="@{model.dayOfTheWeekClicked()}"
+                android:text="화"
                 app:first_selected="@{model.alarmLiveData.tue}" />
 
             <Button
@@ -123,8 +130,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
-                android:text="수"
                 android:onClick="@{model.dayOfTheWeekClicked()}"
+                android:text="수"
                 app:first_selected="@{model.alarmLiveData.wed}" />
 
             <Button
@@ -133,8 +140,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
-                android:text="목"
                 android:onClick="@{model.dayOfTheWeekClicked()}"
+                android:text="목"
                 app:first_selected="@{model.alarmLiveData.thu}" />
 
             <Button
@@ -143,8 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
-                android:text="금"
                 android:onClick="@{model.dayOfTheWeekClicked()}"
+                android:text="금"
                 app:first_selected="@{model.alarmLiveData.fri}" />
 
             <Button
@@ -153,8 +160,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_effect"
-                android:text="토"
                 android:onClick="@{model.dayOfTheWeekClicked()}"
+                android:text="토"
                 app:first_selected="@{model.alarmLiveData.sat}" />
 
         </TableRow>
@@ -170,17 +177,40 @@
 
     <Button
         android:id="@+id/music_picker_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginTop="135dp"
         android:layout_marginBottom="181dp"
-        android:text="music"
+        android:background="@drawable/ic_baseline_library_music_24"
         android:onClick="@{view->model.musicPickBtnClicked(view)}"
         app:layout_constraintBottom_toTopOf="@+id/tableRow2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:text="시"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toStartOf="@+id/hour_setting_rcle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="분"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toStartOf="@+id/mintue_setting_rcle"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

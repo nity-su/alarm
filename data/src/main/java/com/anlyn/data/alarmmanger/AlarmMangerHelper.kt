@@ -62,17 +62,20 @@ class AlarmMangerHelperImpl constructor(val context: Context, val intent:Intent?
     }
 
     private fun add(chk_week:Int){
-//        val z: ZoneId = ZoneId.of("Asia/Seoul")
-        var ld: LocalDate = LocalDate.now()
+        var ld: LocalDate = LocalDate.now().with(DayOfWeek.of(chk_week))
         val nowDow: DayOfWeek = LocalDate.now().dayOfWeek
-        val lt: LocalTime = LocalTime.of(hour, minute)
+
+        if(nowDow.value<chk_week)
+            ld = ld.with(TemporalAdjusters.next(DayOfWeek.of(chk_week)))
+
+        val lt: LocalTime = LocalTime.of(hour, minute,0)
         val nowZdt: ZonedDateTime = ZonedDateTime.now()
         val nowMils:Long = nowZdt.toInstant().toEpochMilli()
         val zdt: LocalDateTime = LocalDateTime.of(ld, lt)
         var targetZdtMils = zdt.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        Log.d(TAG,"targetZdtMils"+targetZdtMils.toString())
+        Log.d(TAG,"nowMils"+nowMils.toString())
 
-        if(nowDow.value<chk_week)
-            ld = ld.with(TemporalAdjusters.next(DayOfWeek.of(chk_week)))
 
         if(nowMils>targetZdtMils){
             ld = ld.with(TemporalAdjusters.next(DayOfWeek.of(chk_week)))

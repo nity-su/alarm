@@ -13,14 +13,15 @@ class AlterNotification : BroadcastReceiver(){
     override fun onReceive(context: Context?, intent: Intent?) {
         val id = intent?.getIntExtra("id",0)
         val musicUriStr = intent?.getStringExtra("uri")
+        Thread(Runnable {
+            MediaPlayer.init(context!!.applicationContext,musicUriStr)
+            MediaPlayer.prepare()
+            MediaPlayer.start()
 
+        }).start()
         val helper = NotificationHelper(context)
         val bn = helper.getChannelNotification(id!!,musicUriStr)
         helper.getManager()!!.notify(id,bn!!.build())
-
-        MediaPlayer.init(context!!,musicUriStr)
-        MediaPlayer.prepare()
-        MediaPlayer.start()
 
         Log.d(TAG,"success receiver")
         //music player

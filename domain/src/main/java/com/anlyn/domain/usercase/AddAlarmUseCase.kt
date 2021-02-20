@@ -11,7 +11,7 @@ class AddAlarmUseCase(transformer:Transformer<Boolean>
 ) : UseCase<Boolean>(transformer) {
 
     companion object {
-        private const val PARAM_ALARM_ENTITY = "movieEntity"
+        private const val PARAM_ALARM_ENTITY = "AlarmEntity"
     }
 
     override fun createObservable(data:Map<String,Any?>?): Observable<Boolean> {

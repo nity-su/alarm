@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.core.Observable
 class RemoveAlarmUseCase(private val localRepo: LocalRepository,private val alarmMangerHelper: AlarmMangerHelper,
                          transformer: Transformer<Boolean>) : UseCase<Boolean>(transformer){
     companion object {
-        private const val PARAM_ALARM_ENTITY = "Entity"
+        private const val PARAM_ALARM_ENTITY = "AlarmEntity"
     }
     override fun createObservable(data: Map<String, Any?>?): Observable<Boolean> {
         val alarmEntity = data?.get(PARAM_ALARM_ENTITY) as AlarmEntity

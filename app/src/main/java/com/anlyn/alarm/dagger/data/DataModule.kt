@@ -31,11 +31,10 @@ object DataModule{
         @JvmStatic
         @Provides
         fun providesRoomDataBase(context: Context): AppDataBase {
-            Log.d("ProvidesRoomDataBase", "exe")
             return Room.databaseBuilder(
                 context.applicationContext,
                 AppDataBase::class.java,
-                "myDB"
+                "AlarmDB"
             ).build()
         }
         @JvmStatic
@@ -46,7 +45,6 @@ object DataModule{
             alarmDataEntityMapper: AlarmDataEntityMapper,
             alarmEntityDataMapper: AlarmEntityDataMapper
         ): RoomAlarmDataSource {
-            Log.d("RoomAlarmDataSource", "exe")
             return RoomAlarmDataSource(database, alarmEntityDataMapper, alarmDataEntityMapper)
         }
 

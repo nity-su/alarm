@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AlarmWheater</string>
+    <string name="app_name">알람</string>
     <string name="title_activity_ringing">RingingActivity</string>
     <!--
     This string is used for square devices and overridden by hello_world in

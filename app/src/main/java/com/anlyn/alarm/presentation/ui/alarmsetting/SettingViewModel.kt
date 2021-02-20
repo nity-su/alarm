@@ -25,7 +25,7 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
 
     val hourLiveData = MutableLiveData<Int>()
     val minuteLiveData = MutableLiveData<Int>()
-    lateinit var musicUriStr:String
+    var musicUriStr:String =""
     val alarmLiveData : LiveData<AlarmEntity> = MutableLiveData()
     init {
         Log.d(TAG,binding.hashCode().toString())
@@ -62,8 +62,8 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
     }
 
     fun configureClicked(view:View){
-        alarmLiveData.value!!.hour = hourLiveData.value!!
-        alarmLiveData.value!!.minute = minuteLiveData.value!!
+        alarmLiveData.value!!.hour = hourLiveData.value ?: 0
+        alarmLiveData.value!!.minute = minuteLiveData.value ?: 0
         alarmLiveData.value!!.sun = binding.sunBtn.isSelected
         alarmLiveData.value!!.mon = binding.monBtn.isSelected
         alarmLiveData.value!!.tue = binding.tueBtn.isSelected
@@ -72,6 +72,10 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
         alarmLiveData.value!!.fri = binding.friBtn.isSelected
         alarmLiveData.value!!.sat = binding.satBtn.isSelected
         alarmLiveData.value!!.musicUriStr = musicUriStr
+
+        if(alarmLiveData.value!!.musicUriStr.equals("")){
+            return
+        }
 
         addAlarmUseCase.save(alarmLiveData.value!!)
             .subscribe({
@@ -93,7 +97,7 @@ class SettingViewModel(val addAlarmUseCase: AddAlarmUseCase,
                     snapHelper.findSnapView(recyclerView.layoutManager)
                         .let { val cardView = it as CardView
                             val textView = cardView.getChildAt(0) as TextView
-                            mLiveData.value = textView.text.toString().toInt()
+                            mLiveData.value = textView.text.toString().toInt() ?: 0
                             lastView = textView
                             textView.setTextColor(Color.BLUE)}
                 } else if(lastView != null){

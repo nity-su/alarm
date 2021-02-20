@@ -16,6 +16,8 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.anlyn.alarm.BR
@@ -62,6 +64,11 @@ class RingingActivity : AppCompatActivity() {
                 })}
             ,{})
 
+    }
+
+    override fun onStop() {
+        NotificationManagerCompat.from(this).cancelAll()
+        super.onStop()
     }
 
     override fun onDestroy() {

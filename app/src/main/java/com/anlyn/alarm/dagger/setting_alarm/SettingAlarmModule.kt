@@ -33,14 +33,7 @@ object SettingAlarmModule {
     fun providesActivitySettingAlarmBinding(activity: SettingActivity):ActivitySettingBinding{
         return ActivitySettingBinding.inflate(activity.layoutInflater)
     }
-//    @JvmStatic
-//    @Named("SettingAlarmBindingLazy")
-//    @Provides
-//    fun providesActivitySettingAlarmBindingLazy(
-//        @Named("SettingAlarmBinding") binding: ActivitySettingBinding):Lazy<ActivitySettingBinding>{
-//        val bindingLazy by Lazy{}
-//        return bindingLazy
-//    }
+
     @JvmStatic
     @Provides
     fun providesSettingAlarmVMFactory(addAlarmUseCase: AddAlarmUseCase,
