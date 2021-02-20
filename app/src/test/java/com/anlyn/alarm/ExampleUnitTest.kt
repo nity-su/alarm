@@ -18,7 +18,7 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         var localDate = LocalDate.now();
         System.out.printf("today: %s%n", localDate);
-        var date3 = localDate.with(DayOfWeek.MONDAY);
+        var date3 = localDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
         System.out.printf("next Monday: %s%n", date3);
 //        assertEquals(4, 2 + 2)
     }

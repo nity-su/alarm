@@ -81,7 +81,6 @@ class AlarmMangerHelperImpl constructor(val context: Context, val intent:Intent?
             ld = ld.with(TemporalAdjusters.next(DayOfWeek.of(chk_week)))
             targetZdtMils = LocalDateTime.of(ld, lt).atZone(ZoneId.systemDefault())
                 .toInstant().toEpochMilli()
-            Log.d(TAG,"next dayOfWeek")
         }
 
         val requestCode = getRequestCode(chk_week)
