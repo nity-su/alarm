@@ -29,8 +29,10 @@ object DisplayAlarmModule {
     fun providesGetAllAlarmUseCase(@Named("LocalRepo")  localRepo: LocalRepository): GetAllAlarmUseCase{
         return GetAllAlarmUseCase(ASyncTransformer(),localRepo)
     }
+
     @Provides
     @JvmStatic
+    @DisplayAlarmScope
     fun providesVMFactory(@Named("getAllAlarmUseCase") getAllAlarmUseCase: GetAllAlarmUseCase,
                           @Named("removeAlarmUseCase") removeAlarmUseCase: RemoveAlarmUseCase): DisplayAlarmVMFactory {
         return DisplayAlarmVMFactory(

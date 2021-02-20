@@ -2,6 +2,7 @@ package com.anlyn.alarm.dagger.androidInjection
 
 import com.anlyn.alarm.dagger.data.DataModule
 import com.anlyn.alarm.dagger.display_alarm.DisplayAlarmModule
+import com.anlyn.alarm.dagger.display_alarm.DisplayAlarmScope
 import com.anlyn.alarm.dagger.ringing_alarm.RingingAlarmModule
 import com.anlyn.alarm.dagger.setting_alarm.SettingActivityScope
 import com.anlyn.alarm.dagger.setting_alarm.SettingAlarmModule
@@ -13,7 +14,7 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivitiesModule {
-
+    @DisplayAlarmScope
     @ContributesAndroidInjector(modules = [DataModule::class,DisplayAlarmModule::class])
     abstract fun contributesDisplayAlarmActivity():DisplayAlarmActivity
 
