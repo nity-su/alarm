@@ -39,6 +39,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
     api "androidx.room:room-runtime:$room_version"
     api "androidx.room:room-compiler:$room_version"
@@ -48,4 +49,8 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.20' // if you use the support libraries
     kapt 'com.google.dagger:dagger-android-processor:2.20'
     kapt 'com.google.dagger:dagger-compiler:2.20'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+    implementation "com.squareup.retrofit2:retrofit:2.6.0"
 }
