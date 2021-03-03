@@ -3,12 +3,17 @@ package com.anlyn.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+import java.net.URI
 
 @Entity (tableName = "alarmSetCondition")
 data class AlarmData(
     @PrimaryKey (autoGenerate = true)
     val id:Int,
-    val time:Int,
+    val hour:Int,
+    val minute:Int,
+    @SerializedName("music_uri")
+    val musicUriStr:String,
     val mon:Boolean,
     val teu:Boolean,
     val wed:Boolean,
